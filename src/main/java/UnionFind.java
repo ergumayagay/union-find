@@ -10,6 +10,7 @@ public class UnionFind {
     private int[] id;
     private int[] size;
     private int[] largest;
+    private int[] smallest;
 
     public UnionFind(int[] elements) {
         this.elements = elements;
@@ -17,6 +18,7 @@ public class UnionFind {
         id = new int[elements.length];
         size = new int[elements.length];
         largest =  new int[elements.length];
+        smallest = new int[elements.length];
 
 
         //set all size to 1
@@ -28,6 +30,7 @@ public class UnionFind {
         for(int i = 0; i < id.length; i++){
             largest[i] = i;
             id[i] =i;
+            smallest[i] = i;
         }
     }
 
@@ -69,8 +72,10 @@ public class UnionFind {
 
         if(elements[largest[i]] > elements[largest[j]]){
             largest[j] = largest[i];
+            smallest[i] = smallest[j];
         }else{
             largest[i] = largest[j];
+            smallest[j] = smallest[i];
         }
     }
 
@@ -78,5 +83,12 @@ public class UnionFind {
         return elements[largest[i]];
     }
 
+    public void remove(int i){
+        id[i] =i;
+    }
+
+    public int findSuccessor(int i){
+        return elements[smallest[i]];
+    }
 
 }

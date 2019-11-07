@@ -37,4 +37,17 @@ public class UnionFindTest {
     public void testFind(){
         assertEquals(9, unionFind.find(1));
     }
+
+    @Test
+    public void testRemove() {
+        unionFind.remove(2);
+        // assertEquals(false, unionFind.connected());
+        assert(!unionFind.connected(2, 0));
+        assert(unionFind.connected(0, 1));
+    }
+
+    @Test
+    public void testFindSuccessor(){
+        assertEquals(1, unionFind.findSuccessor(3));
+    }
 }
